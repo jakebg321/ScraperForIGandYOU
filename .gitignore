@@ -1,0 +1,27 @@
+# Ignore Python virtual environment
+venv/
+env/
+
+# Byte-compiled / optimized / DLL files
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+
+# Ignore log files
+*.log
+
+# Ignore macOS system files
+.DS_Store
+
+# Ignore large binary files like archives
+*.zip
+*.dll
+*.exe
+
+# Ignore build artifacts
+dist/
+build/
+
+# PyInstaller
+*.spec
