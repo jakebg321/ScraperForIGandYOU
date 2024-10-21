@@ -1,0 +1,143 @@
+# README / Setup Instructions for Scraper Project
+
+## Introduction
+This document will guide you through setting up the scraper project from GitHub. It is intended for users who may not be familiar with VSCode or Python development. The instructions cover both Windows and Mac environments, including installing Python, setting up a virtual environment, installing required packages, and troubleshooting.
+
+## Prerequisites
+- **Python 3.11.9**
+  - You need to have Python 3.11.9 installed.
+  - Download it from [Python Downloads](https://www.python.org/downloads/release/python-3119/).
+  - During installation on Windows, make sure to check **Add Python to PATH**.
+
+## Step-by-Step Instructions
+
+### 1. Clone the Repository
+First, open a terminal (Command Prompt on Windows, Terminal on Mac) and clone the Git repository:
+
+#### Windows Command Prompt
+```cmd
+:: Clone the repository to a directory called scraperfromGit
+git clone https://github.com/jakebg321/ScraperForIGandYOU.git scraperfromGit
+```
+
+#### Mac Terminal
+```bash
+# Clone the repository to a directory called scraperfromGit
+git clone https://github.com/jakebg321/ScraperForIGandYOU.git scraperfromGit
+```
+
+### 2. Navigate to the Project Directory
+Change into the project directory:
+
+```cmd
+cd scraperfromGit
+```
+
+### 3. Create a Virtual Environment
+Creating a virtual environment will help manage dependencies separately from other Python projects.
+
+#### Windows Command Prompt
+```cmd
+py -m venv venv
+```
+
+#### Mac Terminal
+```bash
+python3 -m venv venv
+```
+
+### 4. Activate the Virtual Environment
+Activate the virtual environment to install dependencies in an isolated environment.
+
+#### Windows Command Prompt
+```cmd
+venv\Scripts\activate
+```
+
+#### Mac Terminal
+```bash
+source venv/bin/activate
+```
+
+### 5. Install Dependencies
+Install the required packages from the `requirements.txt` file:
+
+```cmd
+pip install -r requirements.txt
+```
+
+### 6. Running the Script
+After setting up, you can run the script with Python:
+
+```cmd
+python your_script_name.py
+```
+
+### 7. Troubleshooting Playwright Installation
+If you encounter any issues with **Playwright**, you might need to install its browser binaries separately:
+
+#### Windows & Mac
+```cmd
+playwright install
+```
+
+If Playwright gives you a permissions-related error on Mac, you may need to run the following command with elevated privileges:
+
+```bash
+sudo playwright install
+```
+
+### 8. Deactivating the Virtual Environment
+Once you're done, you can deactivate the virtual environment:
+
+```cmd
+deactivate
+```
+
+## Summary of Commands to Copy & Paste
+
+### For Windows:
+```cmd
+:: Clone the repository
+git clone https://github.com/jakebg321/ScraperForIGandYOU.git scraperfromGit
+
+:: Change to project directory
+cd scraperfromGit
+
+:: Create virtual environment
+python -m venv venv
+
+:: Activate virtual environment
+venv\Scripts\activate
+
+:: Install dependencies
+pip install -r requirements.txt
+
+:: Install Playwright (if needed)
+playwright install
+```
+
+### For Mac:
+```bash
+# Clone the repository
+git clone https://github.com/jakebg321/ScraperForIGandYOU.git scraperfromGit
+
+# Change to project directory
+cd scraperfromGit
+
+# Create virtual environment
+python3 -m venv venv
+
+# Activate virtual environment
+source venv/bin/activate
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Install Playwright (if needed)
+sudo playwright install
+```
+
+## Additional Notes
+- **VSCode Usage**: If you're new to VSCode, you can open the project folder (`scraperfromGit`) by clicking **File -> Open Folder** and selecting the folder.
+- **Python Version**: Make sure you use Python **3.11.9** or above for compatibility with the project dependencies.
