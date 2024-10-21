@@ -141,3 +141,6 @@ sudo playwright install
 ## Additional Notes
 - **VSCode Usage**: If you're new to VSCode, you can open the project folder (`scraperfromGit`) by clicking **File -> Open Folder** and selecting the folder.
 - **Python Version**: Make sure you use Python **3.11.9** or above for compatibility with the project dependencies.
+
+
+ONCE DONE JUST RUN MAIN.PY 
