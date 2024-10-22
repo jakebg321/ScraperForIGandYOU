@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Instagram Video Processor - Download</title>
+    <title>Instagram & YouTube Video Processor - Download</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -11,38 +11,98 @@
             margin: 0 auto;
             padding: 20px;
             text-align: center;
+            background: linear-gradient(135deg, #4B0082, #8A2BE2);
+            color: white;
+            min-height: 100vh;
         }
         .download-btn {
             display: inline-block;
-            padding: 12px 24px;
-            margin: 10px;
-            background-color: #0066cc;
+            padding: 15px 30px;
+            margin: 15px;
+            background-color: #6A0DAD;
             color: white;
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 10px;
             font-weight: bold;
+            transition: background-color 0.3s ease;
+            border: 2px solid white;
+        }
+        .download-btn:hover {
+            background-color: #8A2BE2;
+            transform: translateY(-2px);
+        }
+        .github-btn {
+            background-color: #333;
+        }
+        .github-btn:hover {
+            background-color: #555;
         }
         .note {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .features {
+            margin-top: 40px;
+            text-align: left;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        .features ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        .features li {
+            margin: 10px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+        .features li:before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #8A2BE2;
+        }
+        .container {
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            border-radius: 15px;
             margin-top: 20px;
-            padding: 15px;
-            background-color: #f8f9fa;
-            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
 <body>
-    <h1>Instagram Video Processor</h1>
-    
-    <p>Download our application to process Instagram videos on your local machine.</p>
-    
-    <div class="downloads">
-        <a href="{{ url_for('download_windows') }}" class="download-btn">Download for Windows</a>
-        <a href="{{ url_for('download_mac') }}" class="download-btn">Download for Mac</a>
-    </div>
+    <div class="container">
+        <h1>Instagram & YouTube Video Processor</h1>
+        
+        <p>Download our powerful application to process videos from Instagram and YouTube with custom effects.</p>
+        
+        <div class="downloads">
+            <a href="{{ url_for('download') }}" class="download-btn">Download for Windows</a>
+            <a href="https://github.com/jakebg321/CompletedScrape" class="download-btn github-btn">View on GitHub</a>
+        </div>
 
-    <div class="note">
-        <p><strong>Note:</strong> On first run, the application will download necessary components (approximately 150MB). 
-        This is a one-time download required for video processing capabilities.</p>
+        <div class="features">
+            <h2>Features</h2>
+            <ul>
+                <li>Download videos from Instagram and YouTube</li>
+                <li>Process entire YouTube channels</li>
+                <li>Apply custom video effects</li>
+                <li>Batch download capabilities</li>
+                <li>Pause/Resume functionality</li>
+                <li>Progress tracking and status updates</li>
+            </ul>
+        </div>
+
+        <div class="note">
+            <p><strong>Note:</strong> On first run, the application will download necessary components (approximately 150MB). 
+            This is a one-time download required for video processing capabilities.</p>
+            <p><strong>Requirements:</strong> Windows 10 or later, Internet connection, 500MB free disk space</p>
+        </div>
     </div>
 </body>
 </html>
