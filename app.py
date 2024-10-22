@@ -1,21 +1,34 @@
-from flask import Flask, render_template, send_from_directory, jsonify
+from flask import Flask, render_template, send_from_directory, send_file, jsonify
 import os
-import platform
 
 app = Flask(__name__)
+
 @app.route('/')
 def index():
     return render_template('index.html')
 
 @app.route('/download')
 def download():
-    # Check if we're running on Windows
-    if platform.system() == 'Windows':
-        return send_from_directory('static', 'InstagramProcessor.exe', as_attachment=True)
-    else:
+    try:
+        # Define the path to your executable
+        executable_path = os.path.join('static', 'InstagramProcessor.exe')
+        
+        # Check if the file exists
+        if os.path.exists(executable_path):
+            return send_file(
+                executable_path,
+                as_attachment=True,
+                download_name='InstagramProcessor.exe',
+                mimetype='application/x-msdownload'
+            )
+        else:
+            return jsonify({
+                "error": "Download file not found. Please try again later or download from GitHub."
+            }), 404
+    except Exception as e:
         return jsonify({
-            "error": "Direct downloads are only available for Windows. Please visit the GitHub repository for other platforms."
-        }), 400
+            "error": f"Download failed. Please try downloading from GitHub: {str(e)}"
+        }), 500
 
 @app.route('/health')
 def health_check():
