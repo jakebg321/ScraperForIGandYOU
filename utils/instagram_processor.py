@@ -5,7 +5,8 @@ import re
 import os
 import sys
 import tempfile
-
+import time
+import random
 def setup_logging():
     try:
         if getattr(sys, 'frozen', False):
@@ -115,4 +116,5 @@ def process_instagram_video(url, save_path):
     except Exception as e:
         logging.error(f"Unexpected error while processing Instagram video: {str(e)}", exc_info=True)
         return None
+
 

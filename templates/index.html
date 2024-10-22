@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Video Processor - Download</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            text-align: center;
+        }
+        .download-btn {
+            display: inline-block;
+            padding: 12px 24px;
+            margin: 10px;
+            background-color: #0066cc;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+        }
+        .note {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Instagram Video Processor</h1>
+    
+    <p>Download our application to process Instagram videos on your local machine.</p>
+    
+    <div class="downloads">
+        <a href="{{ url_for('download_windows') }}" class="download-btn">Download for Windows</a>
+        <a href="{{ url_for('download_mac') }}" class="download-btn">Download for Mac</a>
+    </div>
+
+    <div class="note">
+        <p><strong>Note:</strong> On first run, the application will download necessary components (approximately 150MB). 
+        This is a one-time download required for video processing capabilities.</p>
+    </div>
+</body>
+</html>

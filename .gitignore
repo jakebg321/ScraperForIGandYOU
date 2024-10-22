@@ -1,27 +1,55 @@
-# Ignore Python virtual environment
-venv/
-env/
-
-# Byte-compiled / optimized / DLL files
-*.pyc
-*.pyo
-*.pyd
+# Create the .gitignore file with all the content at once
+echo "# Python
 __pycache__/
-
-# Ignore log files
-*.log
-
-# Ignore macOS system files
-.DS_Store
-
-# Ignore large binary files like archives
-*.zip
-*.dll
-*.exe
-
-# Ignore build artifacts
-dist/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
 build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Playwright
+**/playwright_browsers/
+**/playwright/
 
 # PyInstaller
-*.spec
+*.manifest
+*.spec.bak
+
+# Logs
+*.log
+
+# Project specific
+downloaded_videos/
+processed_videos/
+temp/
+
+# IDE specific
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Environment
+.env
+.venv
+venv/
+ENV/
+
+# Operating System
+.DS_Store
+Thumbs.db" > .gitignore
