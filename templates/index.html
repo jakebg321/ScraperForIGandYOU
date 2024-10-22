@@ -73,6 +73,46 @@
             margin-top: 20px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
+        .access-form {
+            max-width: 400px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            display: none;
+        }
+        .access-input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 5px;
+            background: rgba(255, 255, 255, 0.9);
+        }
+        .error-message {
+            color: #ff6b6b;
+            margin: 10px 0;
+            display: none;
+        }
+        .locked {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+        .unlock-prompt {
+            color: #ffd700;
+            margin: 10px 0;
+        }
+        .secure-btn {
+            cursor: pointer;
+            border: none;
+            font-size: 16px;
+            font-family: inherit;
+            width: auto;
+        }
+        .download-btn[disabled] {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
     </style>
 </head>
 <body>
@@ -81,22 +121,37 @@
         
         <p>Download our powerful application to process videos from Instagram and YouTube with custom effects.</p>
         
-        <div class="downloads">
-            <a href="{{ url_for('download') }}" class="download-btn">Download for Windows</a>
-            <a href="https://github.com/jakebg321/CompletedScrape" class="download-btn github-btn">View on GitHub</a>
+        {% if not has_access %}
+        <div class="unlock-prompt">
+            <p>Please enter your access key to download</p>
+            <button onclick="showAccessForm()" class="download-btn">Enter Access Key</button>
+        </div>
+        
+        <div id="accessForm" class="access-form">
+            <input type="password" id="accessKey" class="access-input" placeholder="Enter access key">
+            <button onclick="verifyAccess()" class="download-btn">Submit</button>
+            <div id="errorMessage" class="error-message"></div>
+        </div>
+        {% endif %}
+        
+        <div class="downloads {% if not has_access %}locked{% endif %}">
+            <button onclick="handleSecureRedirect('download')" class="download-btn secure-btn" {% if not has_access %}disabled{% endif %}>
+                Download for Windows
+            </button>
+            <button onclick="handleSecureRedirect('github')" class="download-btn github-btn secure-btn" {% if not has_access %}disabled{% endif %}>
+                View on GitHub
+            </button>
         </div>
 
         <div class="features">
             <h2>Features</h2>
-            <ul>
-                <ul class="has-text-left">
-                    <li><strong>All-in-One Convenience:</strong> Download, remove metadata, and process videos with one tool—no more juggling multiple platforms.</li>
-                    <li><strong>Full Channel Download:</strong> Scrape entire YouTube channels or hand-pick your favorite videos for a more tailored approach.</li>
-                    <li><strong>Original Content Ready:</strong> Automatic metadata removal ensures your videos are treated as unique by social media algorithms.</li>
-                    <li><strong>Batch Processing:</strong> Save time by downloading multiple videos in one go, whether it's a full page of Instagram Reels or a selection of YouTube Shorts.</li>
-                    <li><strong>Pause & Resume:</strong> Flexibility to pause and resume downloads at any time, giving you complete control.</li>
-                    <li><strong>Real-Time Progress Updates:</strong> Stay informed with live progress tracking, ensuring you're always in the loop.</li>
-                </ul>
+            <ul class="has-text-left">
+                <li><strong>All-in-One Convenience:</strong> Download, remove metadata, and process videos with one tool—no more juggling multiple platforms.</li>
+                <li><strong>Full Channel Download:</strong> Scrape entire YouTube channels or hand-pick your favorite videos for a more tailored approach.</li>
+                <li><strong>Original Content Ready:</strong> Automatic metadata removal ensures your videos are treated as unique by social media algorithms.</li>
+                <li><strong>Batch Processing:</strong> Save time by downloading multiple videos in one go, whether it's a full page of Instagram Reels or a selection of YouTube Shorts.</li>
+                <li><strong>Pause & Resume:</strong> Flexibility to pause and resume downloads at any time, giving you complete control.</li>
+                <li><strong>Real-Time Progress Updates:</strong> Stay informed with live progress tracking, ensuring you're always in the loop.</li>
             </ul>
         </div>
 
@@ -106,5 +161,61 @@
             <p><strong>Requirements:</strong> Windows 10 or later, Internet connection, 500MB free disk space</p>
         </div>
     </div>
+
+    <script>
+        function showAccessForm() {
+            document.getElementById('accessForm').style.display = 'block';
+        }
+        
+        function verifyAccess() {
+            const accessKey = document.getElementById('accessKey').value;
+            
+            fetch('/verify-access', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded',
+                },
+                body: `access_key=${encodeURIComponent(accessKey)}`
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    window.location.reload();
+                } else {
+                    document.getElementById('errorMessage').textContent = 'Invalid access key';
+                    document.getElementById('errorMessage').style.display = 'block';
+                }
+            })
+            .catch(error => {
+                document.getElementById('errorMessage').textContent = 'An error occurred';
+                document.getElementById('errorMessage').style.display = 'block';
+            });
+        }
+
+        function handleSecureRedirect(urlType) {
+            fetch(`/get-url/${urlType}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data.redirect_url) {
+                        window.location.href = data.redirect_url;
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    const errorMessage = document.getElementById('errorMessage');
+                    if (errorMessage) {
+                        errorMessage.textContent = 'An error occurred during redirect';
+                        errorMessage.style.display = 'block';
+                    }
+                });
+        }
+
+        // Add event listener for Enter key in access key input
+        document.getElementById('accessKey')?.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                verifyAccess();
+            }
+        });
+    </script>
 </body>
 </html>
