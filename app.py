@@ -11,7 +11,7 @@ def index():
 def download():
     # Check if we're running on Windows
     if platform.system() == 'Windows':
-        return send_from_directory('static', 'InstagramVideoProcessor.exe', as_attachment=True)
+        return send_from_directory('static', 'InstagramProcessor.exe', as_attachment=True)
     else:
         return jsonify({
             "error": "Direct downloads are only available for Windows. Please visit the GitHub repository for other platforms."
